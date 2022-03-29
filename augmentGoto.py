@@ -49,15 +49,24 @@ print(inot)
 print("\n\nEnter the goto action to be performed :: ")
 gotoGiven = input()
 
-if gotoGiven.split(".")[1][0] in nonterminals:
-    goto.append(gotoGiven.split(".")[0] + gotoGiven.split(".")[1] + ".")
-    for i in range(len(allprodlist)):
-        if allprodlist[i].split("->")[0] == gotoGiven.split(".")[1][0]:
-            goto.append(allprodlist[i])
-else:
-    goto.append(gotoGiven.split(".")[0] + gotoGiven.split(".")[1] + ".")
+if(gotoGiven.split(".")[1]):
+    y = gotoGiven.split(".")[0]+(gotoGiven.split(".")[1])[0]+"."+(gotoGiven.split(".")[1])[1:]
     
-print(goto)
+    if(y.split(".")[1]):
+        if y.split(".")[1][0] in nonterminals:
+            goto.append(y)
+            for i in range(len(allprodlist)):
+                if allprodlist[i].split("->")[0] == y.split(".")[1][0]:
+                    goto.append(allprodlist[i])
+        else:
+            goto.append(y)
+    else:
+        goto.append(y)
+            
+    print(goto)
+    
+else:
+    print("Further goto not possible")
 
 # E->E+T|T
 # T->i|(E)
